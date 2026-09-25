@@ -18,8 +18,6 @@ Small, optional Tampermonkey scripts for [Yucata](https://www.yucata.de/). Insta
 
 If the link displays source code instead of opening Tampermonkey, open the Tampermonkey dashboard, choose **Utilities → Install from URL**, and paste the Install link.
 
-If you installed an earlier version by copying and pasting, install it once from the links above to enable automatic updates. Disable or remove any duplicate copies in your Tampermonkey dashboard.
-
 ## Updates
 
 Tampermonkey checks for updates according to your settings. You can also check for updates manually in its dashboard. Choose and install any new scripts separately from the catalog above.
