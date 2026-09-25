@@ -16,6 +16,8 @@ Small, optional Tampermonkey scripts for [Yucata](https://www.yucata.de/). Insta
 3. Review the script in Tampermonkey and confirm installation.
 4. Reload Yucata.
 
+If scripts do not run in Opera, Chrome, or another Chromium-based browser, follow [Tampermonkey’s official instructions for enabling userscript execution](https://www.tampermonkey.net/faq.php?locale=en&q=Q209), then reload Yucata.
+
 If the link displays source code instead of opening Tampermonkey, open the Tampermonkey dashboard, choose **Utilities → Install from URL**, and paste the Install link.
 
 ## Updates
