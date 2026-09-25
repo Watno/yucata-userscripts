@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ site.description | escape }}">
+  <title>{{ site.title | escape }}</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.65; color: #20302c; background: #f5f7f5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 48px 20px; }
+    main { max-width: 980px; margin: auto; padding: 36px 44px; background: #fff; border: 1px solid #dce5df; border-radius: 16px; }
+    h1, h2 { line-height: 1.2; color: #173d30; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); margin-top: 0; letter-spacing: -.035em; }
+    h2 { margin-top: 2rem; font-size: 1.35rem; }
+    a { color: #176344; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible { outline: 3px solid #dc9b22; outline-offset: 4px; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { padding: 16px 12px; text-align: left; border-bottom: 1px solid #dce5df; vertical-align: top; }
+    th { background: #eef5f0; }
+    td:first-child { font-weight: 650; width: 26%; }
+    td:last-child a { display: inline-block; padding: 7px 16px; background: #176344; color: white; border-radius: 7px; text-decoration: none; font-weight: 650; }
+    td:last-child a:hover { background: #104b32; }
+    li { margin-block: 6px; }
+    @media (max-width: 600px) {
+      body { padding: 16px 10px; }
+      main { padding: 24px 16px; }
+      th, td { padding: 12px 6px; font-size: .9rem; overflow-wrap: anywhere; }
+      td:last-child a { padding: 7px 10px; }
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { color: #e0e8e2; background: #151d19; }
+      main { background: #1d2922; border-color: #3b4e40; }
+      h1, h2 { color: #e4f6e9; }
+      a { color: #91d9ad; }
+      th { background: #293b30; }
+      th, td { border-color: #3b4e40; }
+      td:last-child a { background: #9cdfb7; color: #102c1c; }
+      td:last-child a:hover { background: #b3edc9; }
+    }
+  </style>
+</head>
+<body>
+  <main>{{ content }}</main>
+</body>
+</html>

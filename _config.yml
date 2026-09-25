@@ -1,0 +1,8 @@
+title: Yucata userscripts
+description: Optional Tampermonkey scripts for Yucata.
+url: https://watno.github.io
+baseurl: /yucata-userscripts
+markdown: kramdown
+exclude:
+  - CHANGELOG.md
+  - LICENSE
