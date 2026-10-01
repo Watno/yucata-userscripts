@@ -1,6 +1,6 @@
 # Yucata userscripts
 
-Small, optional Tampermonkey scripts for [Yucata](https://www.yucata.de/). Install either script independently.
+Small, optional Tampermonkey scripts for [Yucata](https://www.yucata.de/). Install each script independently.
 
 ## Script catalog
 
@@ -8,6 +8,7 @@ Small, optional Tampermonkey scripts for [Yucata](https://www.yucata.de/). Insta
 | --- | --- | --- |
 | Private chat: Enter to send | Enter sends private lobby messages; Shift+Enter inserts a line break. Public chat keeps its existing behavior. | [Install](https://raw.githubusercontent.com/Watno/yucata-userscripts/main/scripts/yucata-lobby-chat-enter.user.js) |
 | Always show forum link | Keeps the forum link visible in the top bar, including when there are no unread messages. The unread badge still appears when needed. | [Install](https://raw.githubusercontent.com/Watno/yucata-userscripts/main/scripts/yucata-always-show-forum.user.js) |
+| Merge pending invitations | Adds sent invitations to the existing Waiting for start section, using its original count, toggle, carousel, and table. Keeps sent invitations' Cancel action and handles either or both groups being empty. | [Install](https://raw.githubusercontent.com/Watno/yucata-userscripts/main/scripts/yucata-merge-pending-invitations.user.js) |
 
 ## Installation
 

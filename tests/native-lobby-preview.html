@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Pending invitations userscript test</title><style>body{margin:0;font:14px system-ui}nav{padding:8px;display:flex;gap:16px;align-items:center}iframe{width:100%;height:calc(100vh - 45px);border:0}</style></head><body>
+<nav><strong>Local userscript test</strong><label>Data <select id="scenario"><option value="actual">Actual local invitations</option><option value="both">Fixture: waiting and sent</option><option value="waiting">Fixture: waiting only</option><option value="sent">Fixture: sent only</option><option value="empty">Fixture: both empty</option></select></label><button id="reload">Reload</button><label><input type="checkbox" id="live"> Update without reload</label><span id="status">Loading</span></nav><iframe id="lobby" src="/en/Overview"></iframe>
+<script>
+const frame = document.getElementById('lobby');
+const scenario = document.getElementById('scenario');
+const reload = () => { document.getElementById('status').textContent = 'Loading'; frame.src = '/en/Overview?pending-test=' + Date.now(); };
+document.getElementById('reload').onclick = reload;
+let fixtureFrame = false;
+scenario.onchange = () => {
+    if (document.getElementById('live').checked && fixtureFrame && scenario.value !== 'actual') frame.contentWindow.y$.invitationlobby.loadWaitingInvitations(true);
+    else reload();
+};
+frame.onload = () => {
+    const w = frame.contentWindow;
+    if (!w.y$?.base?.api) { document.getElementById('status').textContent = 'Lobby API unavailable'; return; }
+    fixtureFrame = scenario.value !== 'actual';
+    if (fixtureFrame) {
+        const cancelled = new Set();
+        const original = w.y$.base.api.fetch;
+        const player = (id, login) => ({ playerID: id, login, isBot: false });
+        const invite = (id, creatorID, game, players) => ({ id, creatorID, gameTypeId: 1, gameTypeName: game, gameName: game, fullName: game,
+            numPlayers: 4, isRanking: true, skillRequirement: -1, speedRequirement: -1, invType: 1, players,
+            invitedPlayers: [], userText: 'Local layout fixture', creatorMu: 25, creatorSigma: 8, invitationOptions: '' });
+        w.y$.base.api.fetch = function(url, options, ...rest) {
+            if (url === '/api/me/invitations/waiting') return Promise.resolve(['both','waiting'].includes(scenario.value)
+                ? [invite(900001, 123, 'ChessJoker', [player(123,'test1'),player(+w.UserID,'test0')])] : []);
+            if (url === '/api/me/invitations/sent') return Promise.resolve(['both','sent'].includes(scenario.value)
+                ? Array.from({length: 12}, (_, n) => invite(900010+n, +w.UserID, 'ChessJoker', [player(+w.UserID,'test0')])).filter(item => !cancelled.has(String(item.id))) : []);
+            if (url.startsWith('/api/invitations/') && options?.method === 'DELETE') { cancelled.add(url.split('/').pop()); document.getElementById('status').textContent = 'Fixture cancellation simulated'; return Promise.resolve(); }
+            if (url.startsWith('/api/invitations/')) { document.getElementById('status').textContent = 'Blocked fixture action'; return Promise.reject(new Error('Fixture action blocked')); }
+            return original.call(this, url, options, ...rest);
+        };
+    }
+    const script = w.document.createElement('script');
+    script.src = '/pending-invitations-userscript-test.js?v=' + Date.now();
+    script.onload = () => {
+        document.getElementById('status').textContent = 'Script loaded';
+        setTimeout(() => w.document.getElementById('waitingInvitesSection')?.scrollIntoView({block:'start'}), 1500);
+    };
+    w.document.head.append(script);
+};
+</script></body></html>
